@@ -1,0 +1,45 @@
+.conteiner{
+    margin: 30px auto;
+    width: 900px;
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+      
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid rgba(230, 228, 228, 0.342);
+}
+      
+.tr:hover {
+    background-color: rgba(242, 237, 237, 0.925);
+}
+
+.sort{
+    position: relative;
+    top:5px
+}
+
+.trash{
+    color: red;
+}
+
+.upOrDown{
+    background-color: white;
+    border: 1px solid #bcbce8;
+    padding-bottom: 3px;
+    cursor: pointer;
+}
+
+.btn{
+    padding-top: 3px;
+    padding-bottom: 3px;
+    background-color: white;
+    border: 1px solid #e9c8c8;
+    cursor: pointer;
+}
+
+

@@ -1,0 +1,15 @@
+.form{
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.width{
+    width: 150px;
+}
+
+.addUser{
+    height: 30px;
+    width: 50px;
+    margin-top: 20px;
+}

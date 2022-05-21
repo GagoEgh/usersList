@@ -1,0 +1,31 @@
+<form [formGroup]="userForm" (ngSubmit)="createUser()" class="form">
+    <div>
+      <label>last Name</label>
+      <input 
+        type="text" formControlName="lastName" 
+        placeholder="last Name" class="search width">  
+    </div>
+    <div>
+      <label>first Name</label>
+      <input 
+        type="text" formControlName="firstName" 
+        placeholder="first Name" class="search width">  
+    </div>
+    <div>
+      <label>age</label>
+      <input 
+        type="text" formControlName="age" 
+        placeholder="age" class="search width">  
+    </div>
+    <div>
+      <label>address</label>
+      <input 
+        type="text" formControlName="address" 
+        placeholder="address" class="search width">  
+    </div>
+    <button type="submit" class="addUser">
+      <fa-icon class="icon" 
+        [icon]="faUserEdit">
+      </fa-icon> 
+    </button>
+  </form>
