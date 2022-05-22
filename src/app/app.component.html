@@ -7,48 +7,55 @@
       <thead>
           <tr>
               <th>
-                  first name
-                <button 
-                (click)="sortUserList('firstName')" 
-                class="upOrDown" >
-                  <!-- [icon]='this.direction === "asc"?faSortUp:faSortDown' -->
-                  <fa-icon 
-                    class="icon" 
-                    [class.sort]='this.direction === "asc"'
-                    [icon]='this.direction === "asc"?faSortUp:faSortDown'
-                    >
-                  </fa-icon>       
-                
-                </button>   
+                <div class="th">
+                  <p>first name</p>  
+                  <button 
+                    (click)="sortUserList('firstName')" 
+                    class="upOrDown">
+                    <fa-icon *ngIf='(direction != "") && (sortName==="firstName")'
+                      class="icon" 
+                      [class.sort]='direction === "asc" && sortName==="firstName"'
+                      [icon]='(direction === "asc") && (sortName==="firstName") ?faSortUp:faSortDown'
+                      >
+                    </fa-icon>     
+                  </button> 
+                </div>  
               </th>
               <th>
-                  last name
+                <div class="th">
+                  <p>last name</p>
                   <button (click)="sortUserList('lastName')" class="upOrDown">
-                    <fa-icon class="icon" 
-                      [class.sort]="isLast"
-                      [icon]="isLast?faSortUp:faSortDown">
+                    <fa-icon *ngIf='direction != "" && sortName==="lastName"'
+                      class="icon" 
+                      [class.sort]='direction === "asc" && sortName==="lastName"'
+                      [icon]='(direction === "asc") && (sortName==="lastName")?faSortUp:faSortDown'>
                     </fa-icon>       
                   </button>
+                </div>
               </th>
               <th>
-                  age
+                <div class="th">
+                  <p>age</p>
                   <button (click)="sortUserList('age')" class="upOrDown">
-                    <fa-icon class="icon" 
-                    [class.sort]="isAge"
-                    [icon]="isAge?faSortUp:faSortDown">
+                    <fa-icon *ngIf='direction != "" && sortName==="age"'
+                      class="icon" 
+                      [class.sort]="isAge"
+                      [icon]='(direction === "asc") && (sortName==="age")?faSortUp:faSortDown'>
                     </fa-icon>       
                   </button>
+                </div>
               </th>
-              <th>
-                  address
-                  
-                <button (click)="sortUserList('address')" class="upOrDown">
-                  <fa-icon class="icon" 
-                    [class.sort]="isAddress"
-                    [icon]="isAddress?faSortUp:faSortDown">
-                  </fa-icon>       
-                </button>
-                  
+              <th class="th">
+                <div class="th">
+                  <p>address</p>  
+                  <button (click)="sortUserList('address')" class="upOrDown">
+                    <fa-icon *ngIf='direction != "" && sortName==="address"' 
+                      class="icon" 
+                      [class.sort]="isAddress"
+                      [icon]='(direction === "asc") && (sortName==="address")?faSortUp:faSortDown'>
+                    </fa-icon>       
+                  </button> 
+                </div> 
               </th> 
               <th>option</th>  
           </tr>

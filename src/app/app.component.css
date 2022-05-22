@@ -14,6 +14,10 @@ th, td {
     border-bottom: 1px solid rgba(230, 228, 228, 0.342);
 }
       
+.th{
+    display: flex;
+    align-items: center;
+}
 .tr:hover {
     background-color: rgba(242, 237, 237, 0.925);
 }
@@ -28,10 +32,13 @@ th, td {
 }
 
 .upOrDown{
+    margin-left: 7px;
     background-color: white;
     border: 1px solid #bcbce8;
     padding-bottom: 3px;
     cursor: pointer;
+    height: 25px;
+    width: 25px;
 }
 
 .btn{
