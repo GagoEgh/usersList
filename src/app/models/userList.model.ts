@@ -3,5 +3,6 @@ export interface User{
     lastName: string;
     age: number;
     address: string;
+    id:number
 }
-export type userKeyType='firstName' | 'lastName'  | 'address'
+export type userKeyType= keyof User; 

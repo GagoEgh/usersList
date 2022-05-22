@@ -1,18 +1,23 @@
-import { Component} from '@angular/core';
-import { User} from './models/userList.model';
-import {  faSortDown, faSortUp, faTrash,faUserEdit } from '@fortawesome/free-solid-svg-icons';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component } from '@angular/core';
+import { User, userKeyType } from './models/userList.model';
+import { faSortDown, faSortUp, faTrash } from '@fortawesome/free-solid-svg-icons';
+
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent  {
+export class AppComponent {
   faSortDown = faSortDown;
   faSortUp = faSortUp;
   faTrash = faTrash;
-  
+
+  sortName?: userKeyType;
+  direction: "asc" | "desc" | "" = "";
+
+
 
   isFrst: boolean = false;
   isLast: boolean = false;
@@ -24,31 +29,35 @@ export class AppComponent  {
       lastName: 'Jhon',
       firstName: 'Doe',
       age: 12,
-      address: "sar u zor"
+      address: "sar u zor",
+      id: 1,
     },
     {
       lastName: 'Davit',
       firstName: 'Smith',
       age: 7,
-      address: "patval"
+      address: "patval",
+      id: 2,
     },
     {
       lastName: 'Jasika',
       firstName: 'Simpson',
       age: 10,
-      address: "verin taxer"
+      address: "verin taxer",
+      id: 3,
     },
     {
       lastName: 'Gustaf',
       firstName: 'Adam',
       age: 10,
-      address: "verin taxer"
+      address: "verin taxer",
+      id: 4,
     }
   ]
 
-  constructor(){}
-   
-  
+  constructor() { }
+
+
 
 
 
@@ -62,196 +71,82 @@ export class AppComponent  {
             user.address.toLocaleLowerCase().startsWith(search.toLocaleLowerCase()) ||
             +search == user.age
         })
-      } else (
-        this.usersList = [
-          {
-            lastName: 'Jhon',
-            firstName: 'Doe',
-            age: 12,
-            address: "sar u zor"
-          },
-          {
-            lastName: 'Davit',
-            firstName: 'Smith',
-            age: 7,
-            address: "patval"
-          },
-          {
-            lastName: 'Jasika',
-            firstName: 'Simpson',
-            age: 10,
-            address: "verin taxer"
-          },
-          {
-            lastName: 'Gustaf',
-            firstName: 'Adam',
-            age: 10,
-            address: "verin taxer"
-          }
-        ]
-      )
+      } else {
+
+        this.usersList = []
+        for (let user of this.users) {
+          this.usersList.push(user);
+        }
+
+      }
     }, 300);
 
 
   }
 
-  delete(index:number){
-    this.usersList.splice(index,1)
+  delete(us: User) {
+
+    this.usersList = this.usersList.filter((item: User) => {
+      return us.id != item.id
+    })
+
+    for (let user of this.users) {
+      if (user.id === us.id) {
+        this.users.delete(user)
+      }
+    }
   }
 
-  editUser(user:User){
+  editUser(user: User) {
     this.usersList.push(user);
   }
-  
-  // sortUserList(bool: boolean, key: userKeyType) {
-  //   bool = !bool;
-
-  //   console.log(key)
-  //   if (key === 'firstName') {
-  //     this.isFrst = !this.isFrst
-  //   } else if (key === 'lastName') {
-  //     this.isLast = !this.isLast
-  //   }
-
-  //   if (bool) {
-
-  //     this.usersList.sort(function (a: User, b: User) {
-  //       if (a[key] > b[key]) {
 
 
-  //         return -1
-  //       }
-  //       if (a[key] < b[key]) {
-
-  //         return 1
-  //       }
-
-  //       return 0;
-  //     })
-  //   }
-
-  //   this.usersList.sort(function (a: User, b: User) {
-
-  //     if (a[key] > b[key]) {
-
-  //       return 1
-  //     }
-
-  //     if (a[key] < b[key]) {
-
-  //       return -1
-  //     }
+  users = new Set(this.usersList);
+  sortUserList(key: userKeyType) {
+    this.sortName = key;
 
 
-  //     return 0
-  //   })
 
 
-  //   console.log(bool)
-  //   return bool
+    if (this.direction === "") {
+      this.direction = "asc"
+    } else if (this.direction === "asc") {
+      this.direction = "desc"
+    } else if (this.direction === "desc") {
+      this.direction = "";
 
-  // }
+    }
 
-  sortAge() {
-    this.isAge = !this.isAge;
-    this.usersList.sort(function (a: User, b: User) {
-      if (a.age > b.age) {
-        return 1
+    if (this.direction === "") {
+      this.usersList = []
+      for (let user of this.users) {
+        this.usersList.push(user);
       }
-      if (a.age < b.age) {
-        return -1
-      }
-      return 0;
-    })
+      return
+    }
 
-    if (this.isAge) {
-      this.usersList.sort(function (a: User, b: User) {
-        if (a.age > b.age) {
+
+    this.usersList.sort((a: User, b: User) => {
+
+      if (a[key] > b[key]) {
+        if (this.direction === "desc") {
           return -1
         }
-        if (a.age < b.age) {
+        return 1
+      }
+
+      if (a[key] < b[key]) {
+        if (this.direction === "desc") {
           return 1
         }
-        return 0;
-      })
-    }
+        return -1
+
+      }
+
+      return 0
+    })
 
   }
 
-  sortAddress() {
-    this.isAddress = !this.isAddress;
-    this.usersList.sort(function (a: User, b: User) {
-      if (a.address > b.address) {
-        return 1
-      }
-      if (a.address < b.address) {
-        return -1
-      }
-      return 0;
-    })
-
-    if (this.isAddress) {
-      this.usersList.sort(function (a: User, b: User) {
-        if (a.address > b.address) {
-          return -1
-        }
-        if (a.address < b.address) {
-          return 1
-        }
-        return 0;
-      })
-    }
-
-  }
-
-  sortLastName() {
-    this.isLast = !this.isLast;
-    this.usersList.sort(function (a: User, b: User) {
-      if (a.lastName > b.lastName) {
-        return 1
-      }
-      if (a.lastName < b.lastName) {
-        return -1
-      }
-      return 0;
-    })
-    if (this.isLast) {
-
-      this.usersList.sort(function (a: User, b: User) {
-        if (a.lastName > b.lastName) {
-          return -1
-        }
-        if (a.lastName < b.lastName) {
-          return 1
-        }
-        return 0;
-      })
-    }
-  }
-
-
-  sortFirstName() {
-    this.isFrst = !this.isFrst;
-    this.usersList.sort(function (a: User, b: User) {
-      if (a.firstName > b.firstName) {
-        return 1
-      }
-      if (a.firstName < b.firstName) {
-        return -1
-      }
-      return 0;
-    })
-
-    if (this.isFrst) {
-      this.usersList.sort(function (a: User, b: User) {
-        if (a.firstName > b.firstName) {
-          return -1
-        }
-        if (a.firstName < b.firstName) {
-          return 1
-        }
-        return 0;
-      })
-    }
-  }
 }

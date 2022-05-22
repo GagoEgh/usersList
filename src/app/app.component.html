@@ -8,17 +8,22 @@
           <tr>
               <th>
                   first name
-                <button (click)="sortFirstName()" class="upOrDown">
+                <button 
+                (click)="sortUserList('firstName')" 
+                class="upOrDown" >
+                  <!-- [icon]='this.direction === "asc"?faSortUp:faSortDown' -->
                   <fa-icon 
                     class="icon" 
-                    [class.sort]="isFrst"
-                    [icon]="isFrst?faSortUp:faSortDown">
+                    [class.sort]='this.direction === "asc"'
+                    [icon]='this.direction === "asc"?faSortUp:faSortDown'
+                    >
                   </fa-icon>       
+                
                 </button>   
               </th>
               <th>
                   last name
-                  <button (click)="sortLastName()" class="upOrDown">
+                  <button (click)="sortUserList('lastName')" class="upOrDown">
                     <fa-icon class="icon" 
                       [class.sort]="isLast"
                       [icon]="isLast?faSortUp:faSortDown">
@@ -27,7 +32,7 @@
               </th>
               <th>
                   age
-                  <button (click)="sortAge()" class="upOrDown">
+                  <button (click)="sortUserList('age')" class="upOrDown">
                     <fa-icon class="icon" 
                     [class.sort]="isAge"
                     [icon]="isAge?faSortUp:faSortDown">
@@ -37,7 +42,7 @@
               <th>
                   address
                   
-                <button (click)="sortAddress()" class="upOrDown">
+                <button (click)="sortUserList('address')" class="upOrDown">
                   <fa-icon class="icon" 
                     [class.sort]="isAddress"
                     [icon]="isAddress?faSortUp:faSortDown">
@@ -55,7 +60,7 @@
               <td>{{user.age}}</td>
               <td>{{user.address}}</td>
               <td>
-                <button type="button" class="btn" (click)="delete(i)">
+                <button type="button" class="btn" (click)="delete(user)">
                   <fa-icon [icon]="faTrash" class="trash"></fa-icon>
                 </button>
                 

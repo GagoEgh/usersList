@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
 import { User } from '../models/userList.model';
@@ -18,6 +18,7 @@ export class UserFormComponent {
   }
 
 
+
   formInit() {
     this.userForm = this.fb.group({
       lastName: ['', Validators.required],
@@ -33,10 +34,18 @@ export class UserFormComponent {
         firstName: this.userForm.get('firstName')?.value,
         lastName: this.userForm.get('lastName')?.value,
         age: +this.userForm.get('age')?.value,
-        address: this.userForm.get('address')?.value
+        address: this.userForm.get('address')?.value,
+        id: 34
       }
       this.addUser.emit(user);
       this.userForm.reset();
     }
   }
+
+
+
+  
+
+
+
 }
