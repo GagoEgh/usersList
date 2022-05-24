@@ -88,7 +88,7 @@ export class AppComponent {
     } else if (this.direction === "desc") {
       this.direction = "";
     }
-    console.log('direction', this.direction)
+  
 
     if (this.direction === "") {
       this.usersList = [...this.users];
