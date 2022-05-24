@@ -39,7 +39,7 @@
                   <button (click)="sortUserList('age')" class="upOrDown">
                     <fa-icon *ngIf='direction != "" && sortName==="age"'
                       class="icon" 
-                      [class.sort]="isAge"
+                      [class.sort]='direction === "asc" && sortName==="age"'
                       [icon]='(direction === "asc") && (sortName==="age")?faSortUp:faSortDown'>
                     </fa-icon>       
                   </button>
@@ -51,7 +51,7 @@
                   <button (click)="sortUserList('address')" class="upOrDown">
                     <fa-icon *ngIf='direction != "" && sortName==="address"' 
                       class="icon" 
-                      [class.sort]="isAddress"
+                      [class.sort]='direction === "asc" && sortName==="address"'
                       [icon]='(direction === "asc") && (sortName==="address")?faSortUp:faSortDown'>
                     </fa-icon>       
                   </button> 

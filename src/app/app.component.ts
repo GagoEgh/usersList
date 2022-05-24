@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { User, userKeyType } from './models/userList.model';
 import { faSortDown, faSortUp, faTrash } from '@fortawesome/free-solid-svg-icons';
 
-
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,14 +14,6 @@ export class AppComponent {
 
   sortName?: userKeyType;
   direction: "asc" | "desc" | "" = "";
-
-
-
-  isFrst: boolean = false;
-  isLast: boolean = false;
-  isAddress: boolean = false;
-  isAge: boolean = false;
-
   usersList: User[] = [
     {
       lastName: 'Jhon',
@@ -54,7 +44,7 @@ export class AppComponent {
       id: 4,
     }
   ]
-
+  users = [...this.usersList];
   constructor() { }
 
 
@@ -72,42 +62,24 @@ export class AppComponent {
             +search == user.age
         })
       } else {
-
-        this.usersList = []
-        for (let user of this.users) {
-          this.usersList.push(user);
-        }
-
+        this.usersList = [...this.users];
       }
     }, 300);
-
-
   }
 
   delete(us: User) {
-
     this.usersList = this.usersList.filter((item: User) => {
       return us.id != item.id
     })
-
-    for (let user of this.users) {
-      if (user.id === us.id) {
-        this.users.delete(user)
-      }
-    }
+    this.users = [...this.usersList];
   }
 
   editUser(user: User) {
     this.usersList.push(user);
   }
 
-
-  users = new Set(this.usersList);
   sortUserList(key: userKeyType) {
     this.sortName = key;
-
-
-
 
     if (this.direction === "") {
       this.direction = "asc"
@@ -115,14 +87,11 @@ export class AppComponent {
       this.direction = "desc"
     } else if (this.direction === "desc") {
       this.direction = "";
-
     }
+    console.log('direction', this.direction)
 
     if (this.direction === "") {
-      this.usersList = []
-      for (let user of this.users) {
-        this.usersList.push(user);
-      }
+      this.usersList = [...this.users];
       return
     }
 
